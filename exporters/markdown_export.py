@@ -1,37 +1,24 @@
-# subtrace/exporters/markdown_export.py
-
 from __future__ import annotations
 
 from graph import AttackSurfaceGraph
 from models import NodeType
 
 
-def export_markdown(
-    graph: AttackSurfaceGraph,
-) -> str:
-
-    lines = []
-
+def export_markdown(graph: AttackSurfaceGraph) -> str:
+    lines: list[str] = []
     lines.append("# Subtrace Attack Surface Report\n")
 
     lines.append("## Summary\n")
+    stats = graph.statistics()
+    lines.append(f"- **nodes**: {stats['nodes']}")
+    lines.append(f"- **edges**: {stats['edges']}")
+    lines.append(f"- **types**: {stats['types']}")
 
-    stats = graph.stats()
+    lines.append("\n---\n## Endpoints\n")
 
-    for k, v in stats.items():
-        lines.append(f"- **{k}**: {v}")
-
-    lines.append("\n---\n")
-    lines.append("## Endpoints\n")
-
-    endpoints = graph.nodes_of_type(
-        NodeType.ENDPOINT
-    )
-
+    endpoints = graph.nodes_by_type(NodeType.ENDPOINT)
     for ep in endpoints:
-
-        m = ep.metadata
-
+        m = ep.metadata or {}
         lines.append(
             f"- `{ep.value}` "
             f"**[{m.get('method','GET')}]** "
@@ -39,13 +26,8 @@ def export_markdown(
             f"Score: `{ep.score}`"
         )
 
-    lines.append("\n---\n")
-    lines.append("## Subdomains\n")
-
-    subs = graph.nodes_of_type(
-        NodeType.SUBDOMAIN
-    )
-
+    lines.append("\n---\n## Subdomains\n")
+    subs = graph.nodes_by_type(NodeType.SUBDOMAIN)
     for s in subs:
         lines.append(f"- {s.value}")
 

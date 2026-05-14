@@ -57,6 +57,27 @@ TECH_SIGNATURES = {
         "firebase",
         "firestore",
     ],
+
+    "wordpress": [
+        "wp-content",
+        "wp-includes",
+        "wp-admin",
+        "wp-json",
+        "/wp-",
+        "wordpress",
+        "wp_version",
+        "wp.js",
+        "wp-embed",
+    ],
+
+    "woocommerce": [
+        "woocommerce",
+    ],
+
+    "php": [
+        "php",
+        "x-powered-by: php",
+    ],
 }
 
 
