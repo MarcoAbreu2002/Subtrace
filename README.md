@@ -1,4 +1,3 @@
-```markdown
 # Subtrace v2 — Attack Surface Mapper
 
 Subtrace is a Python-based attack surface mapping tool that combines:
@@ -321,4 +320,3 @@ Passive sources (crt.sh, OTX, etc.) and generated Google dorks should be used re
 - Add pluggable risk rules + scoring calibration
 - Integrate SQLite storage and session history in CLI
 
-```
